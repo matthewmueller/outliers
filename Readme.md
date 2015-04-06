@@ -9,10 +9,18 @@
 npm install outliers
 ```
 
-## Example
+## Examples
+
+### Pass an array
 
 ```js
 outliers([12, 14, 51, 12, 10, 9, 16, 1]) // [1, 51]
+```
+
+### Filter out outliers
+
+```js
+[12, 14, 51, 12, 10, 9, 16, 1].filter(outliers()); // [12, 14, 12, 10, 9, 16]
 ```
 
 ## Credits

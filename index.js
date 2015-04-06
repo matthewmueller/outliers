@@ -2,7 +2,15 @@
  * Export `outliers`
  */
 
-module.exports = outliers;
+module.exports = function outliers(arr) {
+  if (1 == arguments.length) return calc(arr);
+
+  var o = null;
+  return function(v, i, a) {
+    if (!o) o = calc(a);
+    return !~o.indexOf(v);
+  }
+};
 
 /**
  * Initialize `outliers`
@@ -11,7 +19,7 @@ module.exports = outliers;
  * @return {Array} outliers
  */
 
-function outliers(arr) {
+function calc(arr) {
   arr = arr.slice(0).sort(function(a, b) {
       return a - b;
   });
