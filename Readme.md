@@ -1,7 +1,7 @@
 
 # outliers
 
-  find outliers in a dataset.
+  Find outliers in a dataset.
 
 ## Install
 
