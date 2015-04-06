@@ -1,27 +1,50 @@
 /**
+ * Module Dependencies
+ */
+
+var isArray = Array.isArray;
+
+/**
  * Export `outliers`
  */
 
-module.exports = function outliers(arr) {
-  if (1 == arguments.length) return calc(arr);
-
-  var o = null;
-  return function(v, i, a) {
-    if (!o) o = calc(a);
-    return !~o.indexOf(v);
-  }
-};
+module.exports = outliers;
 
 /**
- * Initialize `outliers`
+ * Initialize the outliers
+ *
+ * @param {Array|String|undefined}
+ * @return {Array|Function}
+ */
+
+function outliers(arr) {
+  if (isArray(arr)) return calc(arr);
+
+  var o = null;
+  var k = 'string' == typeof arr && arr;
+
+  return function(v, i, a) {
+    if (!o) o = calc(a, k);
+    v = k ? v[k] : v;
+    return !~o.indexOf(v);
+  }
+}
+
+/**
+ * Calculate the outliers
  *
  * @param {Array} arr
+ * @param {String} key (optional)
  * @return {Array} outliers
  */
 
-function calc(arr) {
-  arr = arr.slice(0).sort(function(a, b) {
-      return a - b;
+function calc(arr, key) {
+  arr = arr.slice(0);
+
+  if (key) arr = arr.map(function(v) { return v[key]; });
+
+  arr = arr.sort(function(a, b) {
+    return a - b;
   });
 
   var len = arr.length;

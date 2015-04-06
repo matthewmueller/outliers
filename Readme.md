@@ -23,6 +23,13 @@ outliers([12, 14, 51, 12, 10, 9, 16, 1]) // [1, 51]
 [12, 14, 51, 12, 10, 9, 16, 1].filter(outliers()); // [12, 14, 12, 10, 9, 16]
 ```
 
+### Filter out outliers from an array of objects
+
+```js
+var arr = [{ n: 12 },{ n: 14 },{ n: 51 },{ n: 12 },{ n: 10 },{ n: 9 },{ n: 16 },{ n: 1 }]
+arr.filter(outliers('n')); // [{ n: 12 },{ n: 14 },{ n: 12 },{ n: 10 },{ n: 9 },{ n: 16 }]
+```
+
 ## Credits
 
 - Based on: http://en.wikipedia.org/wiki/Interquartile_range#Interquartile_range_and_outliers

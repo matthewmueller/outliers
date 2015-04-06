@@ -1,6 +1,6 @@
 {
   "name": "outliers",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "find outliers in a dataset",
   "keywords": [],
   "author": "Matthew Mueller <mattmuelle@gmail.com>",
