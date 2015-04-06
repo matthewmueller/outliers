@@ -1,0 +1,14 @@
+{
+  "name": "outliers",
+  "version": "0.0.1",
+  "description": "find outliers in a dataset",
+  "keywords": [],
+  "author": "Matthew Mueller <mattmuelle@gmail.com>",
+  "repository": { "type": "git", "url": "git://github.com/MatthewMueller/outliers.git" },
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
+  "main": "index"
+}
