@@ -18,8 +18,36 @@ module.exports = outliers;
  */
 
 function outliers(arr) {
-  if (isArray(arr)) return calc(arr);
+  var isInRange = function(value, middle, range) {
+    return Math.abs(value - middle) > range
+  }
 
+  if (isArray(arr)) return calc(arr, isInRange);
+
+  return outliersByFunction();
+}
+
+function outliersMin(arr) {
+  var isInRange = function(value, middle, range) {
+    return ((value - middle) * -1) > range
+  }
+
+  if (isArray(arr)) return calc(arr, isInRange);
+
+  return outliersByFunction();
+}
+
+function outliersMax(arr) {
+  var isInRange = function(value, middle, range) {
+    return (value - middle) > range
+  }
+
+  if (isArray(arr)) return calc(arr, isInRange);
+
+  return outliersByFunction();
+}
+
+function outliersByFunction() {
   var o = null;
   var k = 'string' == typeof arr && arr;
 
@@ -38,7 +66,7 @@ function outliers(arr) {
  * @return {Array} outliers
  */
 
-function calc(arr, key) {
+function calc(arr, isInRange, key) {
   arr = arr.slice(0);
 
   if (key) arr = arr.map(function(v) { return v[key]; });
@@ -53,7 +81,7 @@ function calc(arr, key) {
   var outliers = [];
 
   for (var i = 0; i < len; i++) {
-    Math.abs(arr[i] - middle) > range && outliers.push(arr[i]);
+    isInRange(arr[i], middle, range) && outliers.push(arr[i]);
   }
 
   return outliers;
