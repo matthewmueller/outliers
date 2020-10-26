@@ -17,14 +17,14 @@ module.exports = outliers;
  * @return {Array|Function}
  */
 
-function outliers(arr) {
-  if (isArray(arr)) return calc(arr);
+function outliers(arr, g = 1.5) {
+  if (isArray(arr)) return calc(arr, undefined, g);
 
   var o = null;
   var k = 'string' == typeof arr && arr;
 
   return function(v, i, a) {
-    if (!o) o = calc(a, k);
+    if (!o) o = calc(a, k, g);
     v = k ? v[k] : v;
     return !~o.indexOf(v);
   }
