@@ -17,14 +17,14 @@ module.exports = outliers;
  * @return {Array|Function}
  */
 
-function outliers(arr) {
-  if (isArray(arr)) return calc(arr);
+function outliers(arr, g = 1.5) {
+  if (isArray(arr)) return calc(arr, undefined, g);
 
   var o = null;
   var k = 'string' == typeof arr && arr;
 
   return function(v, i, a) {
-    if (!o) o = calc(a, k);
+    if (!o) o = calc(a, k, g);
     v = k ? v[k] : v;
     return !~o.indexOf(v);
   }
@@ -38,7 +38,7 @@ function outliers(arr) {
  * @return {Array} outliers
  */
 
-function calc(arr, key) {
+function calc(arr, key, g = 1.5) {
   arr = arr.slice(0);
 
   if (key) arr = arr.map(function(v) { return v[key]; });
@@ -49,7 +49,7 @@ function calc(arr, key) {
 
   var len = arr.length;
   var middle = median(arr);
-  var range = iqr(arr);
+  var range = iqr(arr, g);
   var outliers = [];
 
   for (var i = 0; i < len; i++) {
@@ -82,11 +82,10 @@ function median(arr) {
  * @return {Number}
  */
 
-function iqr(arr) {
+function iqr(arr, g = 1.5) {
   var len = arr.length;
   var q1 = median(arr.slice(0, ~~(len / 2)));
   var q3 = median(arr.slice(Math.ceil(len / 2)));
-  var g = 1.5;
 
   return (q3 - q1) * g;
 }
