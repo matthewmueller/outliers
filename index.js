@@ -2,7 +2,7 @@
  * Module Dependencies
  */
 
-var isArray = Array.isArray;
+const isArray = Array.isArray;
 
 /**
  * Export `outliers`
@@ -17,11 +17,11 @@ module.exports = outliers;
  * @return {Array|Function}
  */
 
-function outliers(arr, g = 1.5) {
-  if (isArray(arr)) return calc(arr, undefined, g);
+function outliers(arr, g=1.5) {
+  if (isArray(arr)) return calc(arr, null,g);
 
-  var o = null;
-  var k = 'string' == typeof arr && arr;
+  const o = null;
+  const k = 'string' == typeof arr && arr;
 
   return function(v, i, a) {
     if (!o) o = calc(a, k, g);
@@ -38,25 +38,14 @@ function outliers(arr, g = 1.5) {
  * @return {Array} outliers
  */
 
-function calc(arr, key, g = 1.5) {
-  arr = arr.slice(0);
+function calc(arr, key, g) {
+  if (key) arr = arr.map(v => v[key]);
+  arr = arr.sort((a, b) => (a < b) ? -1 : ((a > b) ? 1 : 0));
 
-  if (key) arr = arr.map(function(v) { return v[key]; });
+  const middle = Number(median(arr));
+  const range = Number(iqr(arr, g));
 
-  arr = arr.sort(function(a, b) {
-    return a - b;
-  });
-
-  var len = arr.length;
-  var middle = median(arr);
-  var range = iqr(arr, g);
-  var outliers = [];
-
-  for (var i = 0; i < len; i++) {
-    Math.abs(arr[i] - middle) > range && outliers.push(arr[i]);
-  }
-
-  return outliers;
+  return arr.filter(n => Math.abs(Number(n) - middle) > range);
 }
 
 /**
@@ -67,12 +56,11 @@ function calc(arr, key, g = 1.5) {
  */
 
 function median(arr) {
-  var len = arr.length;
-  var half = ~~(len / 2);
+  const half = arr.length >>> 1;
 
-  return len % 2
+  return arr.length % 2
     ? arr[half]
-    : (arr[half - 1] + arr[half]) / 2;
+    : (Number(arr[half - 1]) + Number(arr[half])) / 2;
 }
 
 /**
@@ -82,10 +70,16 @@ function median(arr) {
  * @return {Number}
  */
 
-function iqr(arr, g = 1.5) {
-  var len = arr.length;
-  var q1 = median(arr.slice(0, ~~(len / 2)));
-  var q3 = median(arr.slice(Math.ceil(len / 2)));
+function iqr(arr, g) {
+  const half = arr.length >>> 1; 
 
-  return (q3 - q1) * g;
+  const q1 = median(arr.slice(0, half));
+  const q3 = median(arr.slice(half+1));
+
+  console.log(q1, q3)
+
+  return (Number(q3) - Number(q1)) * g;
 }
+
+
+outliers([11,12,13,14,15,9999999]);
