@@ -27,7 +27,7 @@ function outliers(arr, g=1.5) {
     if (!o) o = calc(a, k, g);
     v = k ? v[k] : v;
     return !~o.indexOf(v);
-  }
+  };
 }
 
 /**

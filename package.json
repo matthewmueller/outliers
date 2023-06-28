@@ -1,17 +1,37 @@
 {
   "name": "outliers",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "find outliers in a dataset",
-  "keywords": [],
+  "main": "./index.js",
+  "exports": {
+    "require": "./index.js"
+  },
+  "type": "commonjs",
+  "scripts": {
+    "lint": "eslint ./index.js",
+    "lint:fix": "eslint ./index.js --fix",
+    "test": "mocha"
+  },
+  "keywords": [
+    "data",
+    "dataset",
+    "iqr",
+    "outliers",
+    "statistics"
+  ],
   "author": "Matthew Mueller <mattmuelle@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MatthewMueller/outliers/issues",
+    "email": "mattmuelle@gmail.com"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/MatthewMueller/outliers.git"
   },
-  "dependencies": {},
   "devDependencies": {
+    "eslint": "^8.43.0",
     "mocha": "*",
     "should": "*"
-  },
-  "main": "index"
+  }
 }
