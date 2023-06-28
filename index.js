@@ -38,7 +38,7 @@ function outliers(arr, g=1.5) {
  * @return {Array} outliers
  */
 
-function calc(arr, key, g) {
+function calc(arr, key, g=1.5) {
   if (key) arr = arr.map(v => v[key]);
   arr = arr.sort((a, b) => (a < b) ? -1 : ((a > b) ? 1 : 0));
 
@@ -70,7 +70,7 @@ function median(arr) {
  * @return {Number}
  */
 
-function iqr(arr, g) {
+function iqr(arr, g=1.5) {
   const half = arr.length >>> 1; 
 
   const q1 = median(arr.slice(0, half));
@@ -80,6 +80,3 @@ function iqr(arr, g) {
 
   return (Number(q3) - Number(q1)) * g;
 }
-
-
-outliers([11,12,13,14,15,9999999]);
