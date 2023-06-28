@@ -1,22 +1,21 @@
 /**
- * Module Dependencies
+ * [outliers]{@link https://github.com/MatthewMueller/outliers}
+ *
+ * @version 0.1.0
+ * @author Matthew Mueller [mattmuelle@gmail.com]
+ * @license MIT
  */
+
 
 const isArray = Array.isArray;
-
-/**
- * Export `outliers`
- */
-
-module.exports = outliers;
 
 /**
  * Initialize the outliers
  *
  * @param {Array|String|undefined}
+ * @param {number} [g=1.5]
  * @return {Array|Function}
  */
-
 function outliers(arr, g=1.5) {
   if (isArray(arr)) return calc(arr, null,g);
 
@@ -34,10 +33,10 @@ function outliers(arr, g=1.5) {
  * Calculate the outliers
  *
  * @param {Array} arr
- * @param {String} key (optional)
+ * @param {String} [key]
+ * @param {number} [g=1.5]
  * @return {Array} outliers
  */
-
 function calc(arr, key, g=1.5) {
   if (key) arr = arr.map(v => v[key]);
   arr = arr.sort((a, b) => (a < b) ? -1 : ((a > b) ? 1 : 0));
@@ -54,7 +53,6 @@ function calc(arr, key, g=1.5) {
  * @param {Array} arr
  * @return {Number}
  */
-
 function median(arr) {
   const half = arr.length >>> 1;
 
@@ -67,9 +65,9 @@ function median(arr) {
  * Find the range
  *
  * @param {Array} arr
+ * @param {number} [g=1.5]
  * @return {Number}
  */
-
 function iqr(arr, g=1.5) {
   const half = arr.length >>> 1; 
 
@@ -78,3 +76,6 @@ function iqr(arr, g=1.5) {
 
   return (Number(q3) - Number(q1)) * g;
 }
+
+
+module.exports = outliers;
