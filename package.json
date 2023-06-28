@@ -30,7 +30,7 @@
     "url": "git://github.com/MatthewMueller/outliers.git"
   },
   "devDependencies": {
-    "eslint": "^8.43.0",
+    "eslint": "*",
     "mocha": "*",
     "should": "*"
   }
