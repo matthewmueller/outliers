@@ -1,4 +1,11 @@
 
+0.1.0 / 2023-06-23
+==================
+
+  * modernize code
+  * add proper JSDoc strings
+  * support arrays of BigInt numbers
+
 0.0.3 / 2015-04-06
 ==================
 
