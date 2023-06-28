@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "description": "find outliers in a dataset",
   "main": "./index.js",
-  "exports": {
-    "require": "./index.js"
-  },
+  "exports": "./index.js",
   "type": "commonjs",
   "scripts": {
     "lint": "eslint ./index.js",
