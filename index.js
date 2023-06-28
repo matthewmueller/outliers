@@ -20,7 +20,7 @@ module.exports = outliers;
 function outliers(arr, g=1.5) {
   if (isArray(arr)) return calc(arr, null,g);
 
-  const o = null;
+  let o = null;
   const k = 'string' == typeof arr && arr;
 
   return function(v, i, a) {
@@ -75,8 +75,6 @@ function iqr(arr, g=1.5) {
 
   const q1 = median(arr.slice(0, half));
   const q3 = median(arr.slice(half+1));
-
-  console.log(q1, q3)
 
   return (Number(q3) - Number(q1)) * g;
 }
