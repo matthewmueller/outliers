@@ -81,5 +81,4 @@ function iqr(arr, g=1.5) {
   return (Number(q3) - Number(q1)) * g;
 }
 
-
-module.exports = outliers;
+export default outliers;
